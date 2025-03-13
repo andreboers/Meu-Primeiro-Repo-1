@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+</head>
+
+<body style="background-color: #1C1C1C; font-family: Arial; font-size: 16px;">
+
+    <div style="text-align: center; background-color: #FFF; position: relative;width: 40%;height: 550px; margin-left: auto; margin-right: auto; border-radius: 50px;">
+    
+        <h1 style="padding-top: 20px;">+Cacau</h1>
+    
+        <h2>Simulador Financeiro</h2>
+
+        <div id="inputs">
+        
+            <p>Quantidade de Hectares você possui em sua fazenda de Cacau:</p>
+            <input type="text" id="i_hectares">
+
+            <p>Quantidade de Hectares perdidos devido a pragas ou doenças:</p>
+            <input type="text" id="i_perda">
+            
+            <p>Valor total que sua fazenda de Cacau rende:</p>
+            <input type="text" id="i_valor">
+            
+            <br><br>
+            
+            <div id="botao">
+                <button onclick="analisar()"
+                    style="background-color: #F0EBF8; color: #000; border-radius: 20px; width: 150px; height: 50px; text-transform: uppercase; cursor: pointer;">Calcular</button>
+            </div>
+        
+        </div>
+        
+        <br><br>
+        
+        <div id="div_mensagem"></div>
+    
+    </div>
+</body>
+
+</html>
+
+<script>
+    function analisar() {
+        var hectares = Number(i_hectares.value); // Variável para inserção da quantidade de Hectares
+        var perda = Number(i_perda.value); // Variável para o valor perdido em hectares da plantação
+        var valor = Number(i_valor.value); // Variável para o valor inserido no input
+
+        var porcentagem = (perda / hectares) * 100; // Calculo da porcentagem da perda de hectares
+        var porcentagemGanho = porcentagem + 30; // Calculo da porcentagem ganha com nosso projeto em execução
+
+        var valorReduzido = valor * (porcentagem / 100); // Valor reduzido com o calculo da porcentagem
+        var valorReduzidoFinal = valor - valorReduzido; // Valor reduzido devido as perdas dos hectares devido a pragas e doenças
+
+        var valorPotencialFinal = valorReduzidoFinal * 1.6; // Calculo para ver o lucro potêncial com nosso projeto em execução
+
+
+        div_mensagem.innerHTML = `
+        <span style="color: red; font-family: Arial; font-size: 16px;">Você perdeu <strong>${porcentagem}%</strong> de sua plantação!
+        <br>
+        <span style="color: green">Com nossa aplicação, sua porcentagem de plantação irá subir para <strong>${porcentagemGanho}%</strong>
+        <br><br>
+        <span style="color: red">Você teve o lucro reduzido de <strong>R$ ${valor}</strong> para <strong>R$ ${valorReduzidoFinal}</strong>
+        <br>
+        <span style="color: green">Com nossa aplicação, seus lucros irão subir para <strong>R$ ${valorPotencialFinal}</strong>
+        `
+    }
+</script>
